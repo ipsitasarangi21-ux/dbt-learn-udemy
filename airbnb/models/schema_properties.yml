@@ -1,0 +1,67 @@
+version: 1
+
+models:
+  - name: dim_listings_cleansed
+    data_tests:
+      - minimum_row_count:
+          arguments:
+            min_row_cnt: 100000
+          severity: warn
+        
+    columns: 
+      - name: listing_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: room_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Shared room','Private room','Hotel room','Villa','Entire home/apt']
+
+      - name: minimum_nights
+        data_tests:
+          - positive_values
+
+
+ 
+  
+
+  - name: dim_hosts_cleansed
+    columns: 
+      - name: host_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: host_name
+        data_tests:
+          - not_null
+          
+
+      - name: is_superhost
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['t','f']  
+
+  - name: dim_hosts_cleansed
+    config:
+        contract:
+          enforced: true
+    columns:
+      - name: host_id
+        data_type: integer
+      - name: host_name
+        data_type: string
+      - name: is_superhost
+        data_type: string
+      - name: updated_at
+        data_type: timestamp
+      - name: created_at
+        data_type: timestamp
+
+
+  
+
