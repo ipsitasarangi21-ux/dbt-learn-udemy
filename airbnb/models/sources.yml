@@ -16,3 +16,16 @@ sources:
           loaded_at_field: date
           freshness:
             warn_after: {count:1, period:hour}
+
+  - name: jaffle_shop
+    schema: jaffle_shop
+    tables: 
+      - name: customers
+
+      - name: orders
+
+  - name: stripe
+    schema: stripe
+    tables: 
+      - name: payment
+    
